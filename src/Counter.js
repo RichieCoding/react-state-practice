@@ -8,20 +8,22 @@ class Counter extends Component {
     }
 
     this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-    this.reset = this.reset.bind(this);
+    // this.decrement = this.decrement.bind(this);
+    // this.reset = this.reset.bind(this);
   }
 
   increment() {
-    
+    this.setState(prevState => {
+      return { count: prevState.count + 1 }
+    })
   }
 
   render() {
     return (
       <div className="Counter">
-        <p className="count">0</p>
+        <p className="count">{this.state.count}</p>
         <section className="controls">
-          <button>Increment</button>
+          <button onClick={this.increment}>Increment</button>
           <button>Decrement</button>
           <button>Reset</button>
         </section>
