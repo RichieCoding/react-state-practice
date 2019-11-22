@@ -1,30 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-const getStateFromLocalStorage = () => {
-  const storage = localStorage.getItem('counterState');
-  if (storage) return JSON.parse(storage).count;
-  return 0 
-}
+import useLocalStorage from './useLocalStorage'
+
 
 const storeStateInLocalStorage = (count) => {
   localStorage.setItem('counterState', JSON.stringify( { count } ))
 }
 
-const useLocalStorage = (initialState, key) => {
-  const get = () => {
-    const storage = localStorage.getItem(key);
-    if (storage) return JSON.parse(storage).value;
-    return initialState;
-  };
-
-  const [value, setValue] = useState(get());
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify({ value }))
-  }, [key, value])
-
-  return [value, setValue];
-};
 
 export const CounterHooks = ({ max, step }) => {
   const [count, setCount] = useLocalStorage(0, 'count');
